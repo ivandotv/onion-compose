@@ -1,22 +1,26 @@
 import { compose } from '../index'
 
-type NextFn<T = never> = (...data: T[]) => void | Promise<void>
+type NextFn<T extends unknown[] = never[], K = never> = (
+  ...data: [...T, K]
+) => void | Promise<void>
 
 function run2<T extends unknown[], K = NextFn>(
-  fn: ((...data: [...T, K]) => void)[]
+  // fn: ((...data: [...T, K]) => void)[]
+  fn: NextFn<T, K>[]
 ) {
   console.log(fn)
 
   return undefined as unknown as (
     data: T,
-    next?: NextFn<[...T]>
+    // next?: (...data: [...T, K]) => void
+    next?: NextFn<T, K>
   ) => Promise<void>
 }
 
 const mm = (_a: string, _b: string, _c: NextFn) => void {}
-const cb = (_a: string, _b: string, _c: NextFn) => void {}
+const cb = (_a: string, _b: string, _c?: NextFn) => void {}
 
-run2<[a: string, b: string]>([mm])(['a', 'a'], cb)
+run2<[a: string, b: string]>([mm, cb])(['a', 'a'], cb)
 
 describe('Test', () => {
   test('Demo Test', () => {

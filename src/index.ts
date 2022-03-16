@@ -1,7 +1,11 @@
-type NextFn = () => void | Promise<void>
+// type NextFn = () => void | Promise<void>
+
+export type NextFn<T extends unknown[] = never[], K = () => unknown> = (
+  ...data: [...T, K]
+) => void | Promise<void>
 
 export function compose<T extends unknown[], K = NextFn>(
-  middleware: ((...data: [...T, K]) => void)[]
+  middleware: NextFn<T, K>[]
 ) {
   if (!Array.isArray(middleware))
     throw new TypeError('Middleware stack must be an array!')
@@ -30,7 +34,7 @@ export function compose<T extends unknown[], K = NextFn>(
         return Promise.reject(err)
       }
     }
-  } as unknown as (data: T) => Promise<void>
+  } as unknown as (data: T, next?: NextFn<T, K>) => Promise<void>
 }
 
 export function nest(composeExec: ReturnType<typeof compose>) {
