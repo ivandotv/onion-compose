@@ -28,6 +28,7 @@ module.exports = {
   },
   rules: {
     'tsdoc/syntax': 'warn',
+    '@typescript-eslint/no-explicit-any': [0],
     '@typescript-eslint/no-unused-vars': [
       2,
       { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }
@@ -76,14 +77,5 @@ module.exports = {
         }
       }
     ]
-  },
-  overrides: [
-    {
-      files: ['*.js', '*.jsx'],
-      rules: {
-        '@typescript-eslint/explicit-function-return-type': 'off',
-        '@typescript-eslint/no-var-requires': 'off'
-      }
-    }
-  ]
+  }
 }

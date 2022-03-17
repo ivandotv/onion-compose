@@ -5,7 +5,6 @@ module.exports = {
   ],
   testEnvironment: 'node',
   moduleDirectories: ['node_modules', 'src'],
-  setupFilesAfterEnv: ['<rootDir>/jestSetup.ts'],
   // moduleNameMapper: {
   //   '~/(.*)': '<rootDir>/src/$1'
   // },
