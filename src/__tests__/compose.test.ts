@@ -4,7 +4,7 @@
   updated to use Jest, await syntax and TypeScirpt
 */
 
-import { compose, NextFn } from '../index'
+import compose, { type NextFn } from '../index'
 
 function wait(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms || 1))

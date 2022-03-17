@@ -4,7 +4,7 @@ export type NextFn<
   U = any
 > = (...data: [...T, K]) => U
 
-export function compose<T extends any[] = any[], U = any>(
+export default function compose<T extends any[] = any[], U = any>(
   middleware: NextFn<T>[]
 ) {
   if (!Array.isArray(middleware))
