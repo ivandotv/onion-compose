@@ -47,6 +47,32 @@ describe('Onion compose', function () {
     expect(arr).toEqual(expect.arrayContaining([1, 2, 3, 4, 5, 6]))
   })
 
+  it('should work with synchronous', async () => {
+    const arr: number[] = []
+    const stack: NextFn<[ctx: Record<string, any>]>[] = []
+
+    void stack.push((_ctx, next) => {
+      arr.push(1)
+      next()
+      arr.push(6)
+    })
+
+    stack.push((_ctx, next) => {
+      arr.push(2)
+      next()
+      arr.push(5)
+    })
+
+    stack.push((_ctx, next) => {
+      arr.push(3)
+      next()
+      arr.push(4)
+    })
+    await compose(stack)([{}])
+
+    expect(arr).toEqual(expect.arrayContaining([1, 2, 3, 4, 5, 6]))
+  })
+
   it('should be able to be called twice', () => {
     const stack: NextFn<[ctx: { arr: number[] }]>[] = []
 
@@ -155,20 +181,53 @@ describe('Onion compose', function () {
       await next()
       expect(ctx2).toEqual(ctx)
     })
-
-    stack.push(async (ctx2, next) => {
-      await next()
-      expect(ctx2).toEqual(ctx)
-    })
-
-    stack.push(async (ctx2, next) => {
-      await next()
-      expect(ctx2).toEqual(ctx)
-    })
-
-    return compose(stack)([ctx])
   })
 
+  it('should keep all the arguments', async () => {
+    const arg1 = {}
+    const arg2 = {}
+    const arg3 = {}
+
+    const stack: NextFn<
+      [
+        p1: Record<string, any>,
+        p2: Record<string, any>,
+        p3: Record<string, any>
+      ]
+    >[] = []
+
+    stack.push(async (p1, p2, p3, next) => {
+      await next()
+      expect(p1).toEqual(arg1)
+      expect(p2).toEqual(arg2)
+      expect(p3).toEqual(arg3)
+
+      return [p1, p2, p3]
+    })
+
+    stack.push(async (p1, p2, p3, next) => {
+      await next()
+      expect(p1).toEqual(arg1)
+      expect(p2).toEqual(arg2)
+      expect(p3).toEqual(arg3)
+    })
+    stack.push(async (p1, p2, p3, next) => {
+      await next()
+      expect(p1).toEqual(arg1)
+      expect(p2).toEqual(arg2)
+      expect(p3).toEqual(arg3)
+    })
+
+    const [p1Result, p2Result, p3Result] = await compose(stack)([
+      arg1,
+      arg2,
+      arg3
+    ])
+
+    expect(p1Result).toBe(arg1)
+    expect(p2Result).toBe(arg2)
+    expect(p3Result).toBe(arg3)
+  })
   it('should catch downstream errors', async () => {
     const arr: number[] = []
     const stack: NextFn<[ctx: any]>[] = []
