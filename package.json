@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "keywords": [],
-  "private": true,
+  "private": false,
   "author": "your-username",
   "license": "MIT",
   "main": "./dist/prod/onionaa-compose.js",
