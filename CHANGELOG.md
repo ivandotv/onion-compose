@@ -1,5 +1,11 @@
 # onion-compose
 
+## 2.0.0
+
+### Major Changes
+
+- e8b58d1: Change module export signature
+
 ## 1.0.1
 
 ### Patch Changes
