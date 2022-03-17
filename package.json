@@ -1,10 +1,14 @@
 {
   "name": "onion-compose",
   "version": "1.0.1",
-  "description": "",
-  "keywords": [],
+  "description": "Onion style function composition just like koa-compose, but with any number of arguments",
+  "keywords": [
+    "compose",
+    "function compose",
+    "koa-compose"
+  ],
   "private": false,
-  "author": "your-username",
+  "author": "Ivan Vlatkovic",
   "license": "MIT",
   "main": "./dist/prod/onionaa-compose.js",
   "umd": "./dist/prod/onion-compose.umd.js",
