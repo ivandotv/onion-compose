@@ -1,5 +1,5 @@
 export type NextFn<
-  T extends unknown[] = unknown[],
+  T extends any[] = any[],
   K extends () => any = () => any,
   U = any
 > = (...data: [...T, K]) => U
