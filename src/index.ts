@@ -1,11 +1,11 @@
-// type NextFn = () => void | Promise<void>
+export type NextFn<
+  T extends unknown[] = unknown[],
+  K extends () => any = () => any,
+  U = any
+> = (...data: [...T, K]) => U
 
-export type NextFn<T extends unknown[] = never[], K = () => unknown> = (
-  ...data: [...T, K]
-) => void | Promise<void>
-
-export function compose<T extends unknown[], K = NextFn>(
-  middleware: NextFn<T, K>[]
+export function compose<T extends any[] = any[], U = any>(
+  middleware: NextFn<T>[]
 ) {
   if (!Array.isArray(middleware))
     throw new TypeError('Middleware stack must be an array!')
@@ -14,7 +14,10 @@ export function compose<T extends unknown[], K = NextFn>(
       throw new TypeError('Middleware must be composed of functions!')
   }
 
-  return function (context: (data: T) => Promise<void>, next?: NextFn) {
+  return function (
+    data: (data: T) => Promise<void>,
+    next?: NextFn<T, () => U, U>
+  ) {
     // last called middleware #
     let index = -1
 
@@ -29,19 +32,10 @@ export function compose<T extends unknown[], K = NextFn>(
       if (!fn) return Promise.resolve()
       try {
         // @ts-expect-error - not sure whats going on here
-        return Promise.resolve(fn(...context, dispatch.bind(null, i + 1)))
+        return Promise.resolve(fn(...data, dispatch.bind(null, i + 1)))
       } catch (err) {
         return Promise.reject(err)
       }
     }
-  } as unknown as (data: T, next?: NextFn<T, K>) => Promise<void>
-}
-
-export function nest(composeExec: ReturnType<typeof compose>) {
-  return (...args: unknown[]) => {
-    const next = args[args.length - 1]
-    args.pop()
-
-    return composeExec(args, next)
-  }
+  } as unknown as (data: T, next?: NextFn<T, () => U, U>) => U
 }
