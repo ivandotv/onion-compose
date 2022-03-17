@@ -1,6 +1,6 @@
 {
   "name": "onion-compose",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Onion style function composition just like koa-compose, but with any number of arguments",
   "keywords": [
     "compose",
