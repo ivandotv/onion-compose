@@ -10,10 +10,9 @@
   "private": false,
   "author": "Ivan Vlatkovic",
   "license": "MIT",
-  "main": "./dist/prod/onionaa-compose.js",
+  "main": "./dist/prod/onion-compose.js",
   "umd": "./dist/prod/onion-compose.umd.js",
   "exports": {
-    "development": "./dist/dev/onion-compose.esm.js",
     "import": "./dist/prod/onion-compose.esm.js",
     "require": "./dist/prod/onion-compose.js"
   },
