@@ -18,7 +18,7 @@ export default function compose<T extends any[] = any[], U = any>(
     data: (data: T) => Promise<void>,
     next?: NextFn<T, () => U, U>
   ) {
-    // last called middleware #
+    // last called middleware
     let index = -1
 
     return dispatch(0)
@@ -31,7 +31,7 @@ export default function compose<T extends any[] = any[], U = any>(
       if (i === middleware.length) fn = next!
       if (!fn) return Promise.resolve()
       try {
-        // @ts-expect-error - not sure whats going on here
+        // @ts-expect-error - problem with types for the spread operator
         return Promise.resolve(fn(...data, dispatch.bind(null, i + 1)))
       } catch (err) {
         return Promise.reject(err)
