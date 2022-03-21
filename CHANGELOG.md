@@ -1,5 +1,11 @@
 # onion-compose
 
+## 2.0.2
+
+### Patch Changes
+
+- 9f15712: fix module exports
+
 ## 2.0.1
 
 ### Patch Changes
