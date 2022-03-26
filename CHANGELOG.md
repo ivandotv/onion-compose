@@ -1,5 +1,11 @@
 # onion-compose
 
+## 2.0.3
+
+### Patch Changes
+
+- 54ab78d: Update documentation.
+
 ## 2.0.2
 
 ### Patch Changes
