@@ -14,6 +14,35 @@ Simple function inspired by [koa compose](https://github.com/koajs/compose) the 
 
 Composing functions with `onion` style execution is a very powerful concept, especially in the `HTTP` framework for composing middleware functions, and I wanted the same middleware execution style like `koa.js` but with a middleware signature like `expressjs`, hence this little module has been created.
 
+If you need a refresher how on what is `oninon style` composition, check this out:
+
+```ts
+test('Run order', async () => {
+  const original: number[] = []
+  const fn1 = async (arr: number[], next: () => void) => {
+    arr.push(1)
+
+    await next()
+
+    arr.push(2)
+
+    return 'done'
+  }
+  const fn2 = async (arr: number[], next: () => void) => {
+    arr.push(3)
+
+    await next()
+
+    arr.push(4)
+  }
+
+  const result = await compose([fn1, fn2])([original])
+
+  expect(original).toEqual(expect.arrayContaining([1, 3, 4, 2]))
+  expect(result).toBe('done')
+})
+```
+
 ## Usage
 
 ```ts
@@ -81,6 +110,6 @@ const nestedCompose = nest(compose([fn1, fn2]))
 await compose([fn3, nestedCompose])(['foo'])
 ```
 
-Keep in mind that Typescript typings can stop working when nesting `compose` inside another `compose` if you know how to make the types work, please make a pull request.
+Keep in mind that Typescript types can stop working when nesting `compose` inside another `compose` if you know how to make the types work, please make a pull request.
 
-All original `koa-compose` tests are passing, except for nested compose functions.
+All original `koa-compose` tests are passing, except for nested compose test.
