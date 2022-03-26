@@ -1,5 +1,11 @@
 # onion-compose
 
+## 2.0.4
+
+### Patch Changes
+
+- 17a8a64: Grammar fix
+
 ## 2.0.3
 
 ### Patch Changes
