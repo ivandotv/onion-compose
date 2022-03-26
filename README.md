@@ -4,7 +4,7 @@
 ![Codecov](https://img.shields.io/codecov/c/gh/ivandotv/onion-compose)
 [![GitHub license](https://img.shields.io/github/license/ivandotv/onion-compose)](https://github.com/ivandotv/onion-compose/blob/main/LICENSE)
 
-Simple function inspired by [koa compose](https://github.com/koajs/compose) the difference is that it accepts any number of arguments as opposed to `koa-compose` which accepts only one argument.
+Simple function inspired by [koa compose](https://github.com/koajs/compose) the difference is that it accepts any number of arguments as opposed to original which accepts only one argument.
 
 ## Install
 
@@ -12,9 +12,9 @@ Simple function inspired by [koa compose](https://github.com/koajs/compose) the 
 
 ## Motivation
 
-Composing functions with `onion` style execution is a very powerful concept, especially in the `HTTP` framework for composing middleware functions, and I wanted the same middleware execution style like `koa.js` but with a middleware signature like `expressjs`, hence this little module has been created.
+Composing functions with `onion` style execution is a very powerful concept, especially in the `HTTP` framework for composing middleware functions, and I wanted the same middleware execution style as `koa.js` but with a middleware signature like `expressjs`, hence this little module has been created.
 
-If you need a refresher how on what is `oninon style` composition, check this out:
+If you need a refresher how on what is `onion style` composition, check this out:
 
 ```ts
 test('Run order', async () => {
@@ -112,4 +112,4 @@ await compose([fn3, nestedCompose])(['foo'])
 
 Keep in mind that Typescript types can stop working when nesting `compose` inside another `compose` if you know how to make the types work, please make a pull request.
 
-All original `koa-compose` tests are passing, except for nested compose test.
+All original `koa-compose` tests are passing, except for the nested compose test.
