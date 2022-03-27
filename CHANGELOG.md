@@ -1,5 +1,12 @@
 # onion-compose
 
+## 2.0.5
+
+### Patch Changes
+
+- edfee2e: Fix package repository link
+- 03acee4: update readme
+
 ## 2.0.4
 
 ### Patch Changes
