@@ -36,12 +36,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/your-username/onion-compose.git"
+    "url": "git+https://github.com/ivandotv/onion-compose.git"
   },
   "bugs": {
-    "url": "https://github.com/your-username/onion-compose/issues"
+    "url": "https://github.com/ivandotv/onion-compose/issues"
   },
-  "homepage": "https://github.com/your-username/onion-compose#readme",
+  "homepage": "https://github.com/ivandotv/onion-compose#readme",
   "devDependencies": {
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-typescript": "^7.16.7",
